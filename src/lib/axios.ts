@@ -90,6 +90,8 @@ api.interceptors.response.use(
       // reject the pending queue requests with the refresh error
       processQueue(refreshError, null)
       tokenStore.clearToken()
+      //add Event dispatch so authprovider know thar tokens expried so log out the user
+       window.dispatchEvent(new Event('auth:expired'))
       // reject the original request with the refresh error
       return Promise.reject(refreshError)
     } finally {
