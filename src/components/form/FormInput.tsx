@@ -13,12 +13,13 @@ export function FormInput<T extends FieldValues>({
   label,
   description,
   type,
+  required,
   ...inputProps
 }: FormInputProps<T>) {
   const [ showPassword, setshowPassword ] = useState(false)
   const isPassword = type === 'password';
   return (
-    <FormField control={control} name={name} label={label} description={description}>
+    <FormField control={control} name={name} label={label} description={description} required={required}>
       {({ field, invalid, id }) => (
         <div className="relative">
           <Input {...inputProps} {...field} type={showPassword && isPassword ? 'text' : type} id={id} aria-invalid={invalid} className={isPassword ? "pr-10" : ""} />

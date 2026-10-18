@@ -43,7 +43,7 @@ export function FormField<T extends FieldValues>({
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
           { label && <FieldLabel htmlFor={id}>{label}
-            { required && <span className='text-destructive'>*</span>}
+          { required && <span className='text-destructive'>*</span>}
           </FieldLabel>}
           {children({ field, invalid: fieldState.invalid, id })}
           {description && <FieldDescription>{description}</FieldDescription>}
