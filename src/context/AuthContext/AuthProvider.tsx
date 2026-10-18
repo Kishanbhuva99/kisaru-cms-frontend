@@ -2,10 +2,10 @@ import { useState, useEffect, type ReactNode } from "react";
 import axios from "axios";
 import { tokenStore } from "@/lib/tokenStore";
 import { AuthContext } from "./AuthContext";
-import type { Login, Register } from "@/features/auth/types/auth.types";
+import type { Login } from "@/features/auth/types/auth.types";
 import { getMeApi } from "@/features/users/api/userApi";
 import type { User } from "@/features/users/types/user.types";
-import { loginApi, registerApi, logoutApi } from "@/features/auth/api/authApi";
+import { loginApi, logoutApi } from "@/features/auth/api/authApi";
 
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -52,11 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     tokenStore.setToken(response.accessToken)
     setUser(response.data)
   }
-  // register call and redirect to login page
-  const register = async (payload: Register) => {
-     await registerApi(payload)
-    // here register api dont give accesstoken we will redirect to log in page after successfull registration.
-  }
+
 // logout call
   const logout = async () => {
     try {
@@ -71,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     //context provider with values
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, isInitializing, login, register, logout }}
+      value={{ user, isAuthenticated: !!user, isInitializing, login, logout }}
     >
       {children}
     </AuthContext.Provider>

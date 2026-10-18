@@ -7,6 +7,9 @@ import AppLayout from "./layouts/AppLayout";
 import { GuestOnlyRoute } from "./guards/GuestOnlyRoute";
 // import { RoleCheckedRoute } from "./guards/RoleCheckedRoute";
 
+//layouts
+import AuthLayout from "@/app/layouts/AuthLayout";
+
 //pages
 import HomePage from "@/features/posts/pages/HomePage";
 import LoginPage from "@/features/auth/pages/LoginPage";
@@ -19,9 +22,14 @@ export const router = createBrowserRouter([
   {
     element: <GuestOnlyRoute />,
     children: [
-        { path: '/login', element: <LoginPage/>},
-        { path: '/register', element: <RegisterPage/>},
-      ]
+      {
+        element: <AuthLayout/>,
+        children: [
+          { path: '/login', element: <LoginPage/>},
+          { path: '/register', element: <RegisterPage/>},
+        ]
+      }
+    ]
   },
   {
     element: <AppLayout />,
